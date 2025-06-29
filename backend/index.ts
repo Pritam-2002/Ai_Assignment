@@ -11,13 +11,14 @@ import { updateEntityById } from "./controller/updateData/UpdateData.controller"
 dotenv.config();
 
 const app = express();
+app.use(express.json());
 const port = process.env.PORT || 5000;
 app.use(cors());
 const upload = multer({ dest: "uploads/" });
 
 app.post("/upload", upload.single("file"), handleFileUpload);
 app.get("/data/:collectionName", getDataFromCollection);
-app.patch("/update-entity", updateEntityById);
+app.patch("/data/update-entity", updateEntityById);
 
 // ✅ CONNECT TO MONGODB
 connectDB(); // make sure this runs before app.listen()
